@@ -132,3 +132,6 @@ dmypy.json
 # archive files 
 *.gz
 
+# unmovable directories
+ibug*
+
