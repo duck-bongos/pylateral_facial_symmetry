@@ -33,6 +33,8 @@ if len(sys.argv) != 3:
 
 predictor_path = sys.argv[1]
 faces_folder_path = sys.argv[2]
+base_path = "/".join(faces_folder_path.split("/")[-1:])
+annotated_path = str(Path(base_path) / Path("annotated"))
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(predictor_path)
@@ -67,6 +69,31 @@ def annotate_image(img, lm):
     return img
 
 
+# add to annotations
+def create_annotations(
+    path: str, fname: str, img: np.ndarray, landmarks: np.ndarray
+) -> None:
+    """Save the image and the landmarks as images"""
+    img = img.copy()
+    landmarks = landmarks.copy()
+
+    path = Path(path)
+
+    # save the image
+    fname_annotated_img = path / Path("img") / Path(fname).name
+
+    if not os.path.exists(str(fname_annotated_img)):
+        imwrite(str(fname_annotated_img), img)
+
+    # save the landmarks for the corresponding image.
+    fname_annotated_landmarks = path / Path("landmarks") / Path(f).stem
+
+    if not os.path.exists(str(fname_annotated_landmarks)):
+        np.save(str(fname_annotated_landmarks), landmarks)
+
+    return
+
+
 def halve_image(img):
     resized = img.copy()
     h, w, _ = resized.shape
@@ -85,11 +112,7 @@ while not fnames_faces.empty():
     if "no_face_detected" in f:
         continue
     print("Processing file: {}".format(f))
-    # img = dlib.load_rgb_image(f)
     cvimg = imread(f)
-
-    # win.clear_overlay()
-    # win.set_image(img)
 
     # Ask the detector to find the bounding boxes of each face. The 1 in the
     # second argument indicates that we should upsample the image 1 time. This
@@ -98,7 +121,6 @@ while not fnames_faces.empty():
 
     print("Number of faces detected: {}".format(len(dets)))
 
-    #
     if len(dets) > 0 and "resized" in f:
         # overwrite original file
         new_fname = f.replace("_resized", "")
@@ -170,22 +192,13 @@ while not fnames_faces.empty():
         # Get the landmarks/parts for the face in box d.
         shape = predictor(cvimg, d)
         landmarks = shape_to_np(shape)
-        # print("Part 0: {}, Part 1: {} ...".format(shape.part(0), shape.part(1)))
 
-        # Draw the face landmarks on the screen.
-
-        # 1. (self: _dlib_pybind11.image_window, center: _dlib_pybind11.point, radius: float, color: _dlib_pybind11.rgb_pixel=rgb_pixel(255,0,0)) -> None
-        # 2. (self: _dlib_pybind11.image_window, center: _dlib_pybind11.dpoint, radius: float, color: _dlib_pybind11.rgb_pixel=rgb_pixel(255,0,0)) -> None
+        # Draw the face landmarks on the image.
         new_image = annotate_image(cvimg, landmarks)
 
-    fname_landmark_img = Path(faces_folder_path) / Path("landmarks") / Path(f).name
-    if not os.path.exists(str(fname_landmark_img)):
-        imwrite(str(fname_landmark_img), new_image)
-    # imshow("Output", new_image)
-    # waitKey(0)
+    create_annotations(annotated_path, f, new_image, landmarks)
+
     destroyAllWindows()
-    # win.add_overlay(dets)
-    # dlib.hit_enter_to_continue()
 
 
 print(f"\nCLEANUP\n{'-'*30}")
