@@ -9,7 +9,7 @@ from matplotlib.patches import Polygon
 import numpy as np
 from PIL import Image, ImageDraw
 
-from maps import (
+from dlib_maps import (
     BILATERAL_MAP,
     LEFT_HALF_OUTLINE_LANDMARKS,
     OUTLINE_HALF_FACE_LEFT,
@@ -130,7 +130,6 @@ if __name__ in "__main__":
     # cv2.line(mask, br, tr, (255, 255, 255), 1)
     # cv2.line(mask, bl, br, (255, 255, 255), 1)
 
-
     aa = a.copy()
     masked = aa * mask[..., None] * mask[..., None]
     masked = masked.astype(np.uint8)
@@ -139,5 +138,9 @@ if __name__ in "__main__":
     cv2.waitKey(0)
 
     construct_half_face(
-        a, arr, points_map=SYMMETRY_MAP, line_map=None, line_color=(0, 255, 255),
+        a,
+        arr,
+        points_map=SYMMETRY_MAP,
+        line_map=None,
+        line_color=(0, 255, 255),
     )
