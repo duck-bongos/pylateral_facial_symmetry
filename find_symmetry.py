@@ -79,7 +79,7 @@ if __name__ in "__main__":
         target_dirpath = sys.argv[1]
         image_files = get_target_directory_files(target_dirpath)
     except IndexError:
-        image_files = get_target_directory_files("altered_carbon/straight-on-faces")
+        image_files = get_target_directory_files("altered_carbon/straight_on_faces")
 
     # file to write the results. Delete previous results.
     with open(fname_results, "w") as sl:
