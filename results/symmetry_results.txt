@@ -1,0 +1,9 @@
+fname_image|epochs|closed_form_error|gradient_descent_error|gd_minus_cf_error|
+Waleed_Zuaiter_0|678|0.61582|0.61649|0.00067|
+Ato_Essandoh_0|693|1.07485|1.07552|0.00067|
+Dina_Shihabi_1|1081|2.28737|2.28867|0.0013|
+Kristin_Lehman_0|1034|0.36049|0.36186|0.00137|
+Dichen_Lachman_0|2132|0.18184|0.18596|0.00412|
+Martha_Higareda_0|2136|3.78321|3.78718|0.00397|
+Chris_Conner_1|1987|0.58277|0.58587|0.0031|
+Will_Yun_Lee_2|2187|0.21528|0.21954|0.00426|

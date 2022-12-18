@@ -1,4 +1,0 @@
-
-cmake path_to_dlib_root/examples -DUSE_SSE2_INSTRUCTIONS=ON
-cmake path_to_dlib_root/examples -DUSE_SSE4_INSTRUCTIONS=ON
-cmake path_to_dlib_root/examples -DUSE_AVX_INSTRUCTIONS=ON
