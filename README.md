@@ -6,7 +6,7 @@ Like Bilateral, but Python, get it?
 2. [Code Depenencies](#code-dependencies)
 2. [Usage](#usage)
 3. [Faces Directory](#altered-carbon-faces-directory)
-4. [View Report](tmp.pdf)
+4. [View Report](CSE_528_Project_Report.pdf)
 
 ### Directory Walkthrough
 * :open_file_folder: [altered_carbon](#altered-carbon-faces-directory) image directory.
@@ -16,7 +16,7 @@ Like Bilateral, but Python, get it?
 * :briefcase: LICENSE: A copy of my 3-Clause license. Free commercial use is NOT granted.
 * :ledger: README: The document you are currently reading.
 * :fire: mediapipe_dataset_utils.py: A module for building generic sets of `mediapipe` identifying landmarks.
-* :pencil: report.pdf: The final report for this project. This document describes what approaches were taken and how. 
+* :pencil: CSE_528_Project_Report.pdf: The final report for this project. This document describes what approaches were taken and how. 
 
 
 ### Code Dependencies
